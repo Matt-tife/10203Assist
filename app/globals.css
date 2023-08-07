@@ -34,3 +34,7 @@ body {
 .login-form  > input {
   color: black;
 }
+
+.flexCenter {
+  @apply flex justify-center items-center;
+}

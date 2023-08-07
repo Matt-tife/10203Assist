@@ -1,11 +1,38 @@
-import Link from 'next/link'
+"use client"
+
+import Link from 'next/link';
+import { useSession, signIn, signOut } from "next-auth/react";
 import React from 'react'
+import { FcGoogle } from 'react-icons/fc'
+import { FaApple } from 'react-icons/fa'
+import { useRouter } from 'next/navigation'
 
 const UserSignup = () => {
+  
+  const { data: session } = useSession();
+  const router = useRouter()
+
+  const handleGoogleSignup = async () => {
+    try {
+      await signIn('google'); // This will initiate the Google sign-up process
+      router.push('/user/dashboard'); // Redirect after successful signup
+    } catch (error) {
+      console.error('Error signing up with Google:', error);
+    }
+  };
+
   return (
     <div className=''>
       {/* left image */}
       <div className='hidden md:flex' />
+      {session?.user? (
+        <>
+          <div> user Signed in </div>
+          <button onClick={() => {signOut()}}>Signout</button> 
+        </>
+      ) : (
+        <div>Not signed in</div>
+      )}
 
       {/* main field */}
       <section className='absolute left-[25%] mt-8 md:absolute md:left-[50%]'>
@@ -20,10 +47,26 @@ const UserSignup = () => {
           <label htmlFor="agree">I agree to get mails about cool stuff from Assistivteq</label>
         </div>
         <div className='flex flex-col gap-[5px] mt-[5px]'>
-          <button className='w-72 h-16 border-yellow-800 border-2'>Continue With Google</button>
-          <button className='w-72 h-16 border-yellow-800 border-2'>Continue With Apple</button>
+          <button 
+            className='flexCenter gap-[20px] cursor-pointer w-72 h-16 border-yellow-800 border-2'
+            type='button'
+            onClick={() => {
+              handleGoogleSignup()
+            }}
+            >
+              <FcGoogle />
+              Continue With Google
+          </button>
+          <button  
+            className='flexCenter gap-[20px] cursor-pointer w-72 h-16 border-yellow-800 border-2'
+            type='button'
+            
+            >
+              <FaApple />
+              Continue With Apple
+          </button>
         </div>
-        <div className='mt-8 flex items-center gap-[3px]'>
+        <div className='relative left-[25px] mt-8 flex items-center gap-[20px]'>
           <div className='w-20 h-[2px] bg-gray-600' />
           <span>OR</span>
           <div className='w-20 h-[2px] bg-gray-600' />
