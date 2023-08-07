@@ -1,4 +1,6 @@
-import './globals.css'
+
+// import './../../globals.css'
+
 
 export const metadata = {
   title: 'Assistivteq',
@@ -7,10 +9,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className=''>
-        {children}
-      </body>
-    </html>
+    <section>
+      {children}
+    </section>
   )
 }
