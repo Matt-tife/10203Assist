@@ -2,24 +2,31 @@
 
 import Link from 'next/link';
 import { useSession, signIn, signOut } from "next-auth/react";
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { FaApple } from 'react-icons/fa'
 import { useRouter } from 'next/navigation'
 
 const UserSignup = () => {
   
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter()
 
   const handleGoogleSignup = async () => {
     try {
       await signIn('google'); // This will initiate the Google sign-up process
-      router.push('/user/dashboard'); // Redirect after successful signup
+      // router.push('/user/dashboard'); // Redirect after successful signup
     } catch (error) {
       console.error('Error signing up with Google:', error);
     }
   };
+
+  useEffect(() => {
+    // Redirect to '/user/dashboard' after successful authentication
+    if (status === 'authenticated' && session) {
+      router.push('/user/dashboard');
+    }
+  }, [status, session, router]);
 
   return (
     <div className=''>
