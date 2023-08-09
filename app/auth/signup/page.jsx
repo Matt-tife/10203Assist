@@ -2,15 +2,19 @@
 
 import Link from 'next/link';
 import { useSession, signIn, signOut } from "next-auth/react";
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { FaApple } from 'react-icons/fa'
 import { useRouter } from 'next/navigation'
+
+import { verifyEmail } from '@/lib/verifyEmail';
 
 const UserSignup = () => {
   
   const { data: session, status } = useSession();
   const router = useRouter()
+
+  const [email, setEmail] = useState('')
 
   const handleGoogleSignup = async () => {
     try {
@@ -21,12 +25,30 @@ const UserSignup = () => {
     }
   };
 
+  const handleEmailSignUp =  (e) => {
+    e.preventDefault();
+
+    console.log('Staying on page')
+
+    // try {
+    //   await verifyEmail(email)
+    //   alert(email)
+    //   router.push('/')
+
+    // } catch (error) {
+    //   console.log(error)
+    // }
+
+
+    
+  }
+
   useEffect(() => {
     // Redirect to '/user/dashboard' after successful authentication
     if (status === 'authenticated' && session) {
       router.push('/user/dashboard');
     }
-  }, [status, session, router]);
+  }, [session]);
 
   return (
     <div className=''>
@@ -80,10 +102,17 @@ const UserSignup = () => {
         </div>
         <form className='flex flex-col gap-[5px] mt-4'>
           <input 
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value)
+            }}
             placeholder='EMAIL'
             className='w-72 h-16 p-4 border-black border-2 rounded-sm' 
           />
           <button 
+            onClick={() => {
+              handleEmailSignUp()
+            }}
             className='w-72 rounded-[50px] h-16 bg-blue-600 outline-none text-white'
             >
               Continue

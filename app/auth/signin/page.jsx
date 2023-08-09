@@ -36,8 +36,8 @@ const UserSignin = () => {
         </button>
         <div className="social mt-8">
           <h3 className=''>Login with</h3>
-          <div className="go"><i class="fab fa-google"></i>  Google</div>
-          <div className="fb"><i class="fab fa-facebook"></i>  Facebook</div>
+          <div className="go"> Google</div>
+          <div className="fb"> Facebook</div>
         </div>
         <div className='mt-4 flex gap-4'>
           <h4>New to Assistivteq?</h4>
