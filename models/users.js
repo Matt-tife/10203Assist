@@ -4,39 +4,44 @@ const UserSchema = new Schema({
   email: {
     type: String,
     unique: [true, 'Email already exists!'],
-    required: [true, 'Email is required!'],
+    // required: [true, 'Email is required!'],
   },
-  password: {
+  userPassword: {
     type: String,
-    required: [true, 'Please input a password']
+    // required: [true, 'Please input a password']
   },
   username: {
     type: String,
-    required: [true, 'Username is required!'],
+    // required: [true, 'Username is required!'],
     match: [/^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, "Username invalid, it should contain 8-20 alphanumeric letters and be unique!"]
   },
-  age: {
-    type: Number
+  dob: {
+    type: String
   },
-  location: {
+  states: {
+    type: String
+  },
+  userCountry: {
     type: String
   },
   firstName: {
     type: String,
-    required: [true, 'First Name is required!'],
+    // required: [true, 'First Name is required!'],
   },
   lastName: {
     type: String,
-    required: [true, 'Last Name is required!'],
+    // required: [true, 'Last Name is required!'],
   },
+  phoneCode: { String },
+  phoneNumber: { Number },
   image: {
     type: String,
   },
-  completedRegistration : {
-    type: Boolean,
-    default: false
-  }
-});
+  // completedRegistration : {
+  //   type: Boolean,
+  //   default: false
+  // }
+}, { timestamps: true });
 
 const User = models.User || model("User", UserSchema);
 

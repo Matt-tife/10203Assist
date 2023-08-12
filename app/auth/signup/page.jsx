@@ -15,38 +15,61 @@ const UserSignup = () => {
   const router = useRouter()
 
   const [email, setEmail] = useState('')
+  const [error, setError] = useState('')
+  const [emailError, setEmailError] = useState('')
 
+  // function to handle google signup 
   const handleGoogleSignup = async () => {
     try {
-      await signIn('google'); // This will initiate the Google sign-up process
-      // router.push('/user/dashboard'); // Redirect after successful signup
+      await signIn('google'); 
     } catch (error) {
       console.error('Error signing up with Google:', error);
     }
   };
 
-  const handleEmailSignUp =  (e) => {
+  // function to handle Email signup 
+  const handleEmailSignUp = async (e) => {
     e.preventDefault();
-
-    console.log('Staying on page')
-
-    // try {
-    //   await verifyEmail(email)
-    //   alert(email)
-    //   router.push('/')
-
-    // } catch (error) {
-    //   console.log(error)
-    // }
-
-
     
-  }
+    // if user has inputted an email
+    if (email) {
+      
+      // send user email to backend api
+      try {
+        const response = await fetch('/api/reg/reg-email', {
+        method: 'POST',
+        body: JSON.stringify({
+          action: 'emailSignup',
+          email
+        }),
+        headers: {
+          "Content-Type" : "application/json",
+          Accept: "application/json",
+        },
+        })
+        if (response.ok) {
+          setEmail('')
+          setEmailError('')
+          router.push('/auth/signup/reg') // redirect user to complete registration
+        } else {
+          setEmailError('User already exists')
+          throw new Error('Unsuccessful')
+        }
+      } catch (error) {
+        console.log(error)
+      }   
+    } else {
+      setError('please input an email') //Error to display if user hasn't inputted an email
+    }
+ 
+  } 
 
+  // useEffect hook used to confirm if user has been authenticated
   useEffect(() => {
-    // Redirect to '/user/dashboard' after successful authentication
+    // Redirect to registration page to continue reg after successful authentication
     if (status === 'authenticated' && session) {
-      router.push('/user/dashboard');
+      router.push('/user/dashboard'); 
+      console.log(session.user)
     }
   }, [session]);
 
@@ -102,6 +125,7 @@ const UserSignup = () => {
         </div>
         <form className='flex flex-col gap-[5px] mt-4'>
           <input 
+            required
             value={email}
             onChange={(e) => {
               setEmail(e.target.value)
@@ -109,10 +133,10 @@ const UserSignup = () => {
             placeholder='EMAIL'
             className='w-72 h-16 p-4 border-black border-2 rounded-sm' 
           />
+            {error && <p className='text-red-600'>{error}</p>}
+            {emailError && <p className='text-red-600'>{emailError}</p>}
           <button 
-            onClick={() => {
-              handleEmailSignUp()
-            }}
+            onClick={handleEmailSignUp}
             className='w-72 rounded-[50px] h-16 bg-blue-600 outline-none text-white'
             >
               Continue
