@@ -7,7 +7,6 @@ import { FcGoogle } from 'react-icons/fc'
 import { FaApple } from 'react-icons/fa'
 import { useRouter } from 'next/navigation'
 
-import { verifyEmail } from '@/lib/verifyEmail';
 
 const UserSignup = () => {
   

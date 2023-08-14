@@ -1,5 +1,8 @@
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+import CredentialsProvider from "next-auth/providers/credentials";
+import { compare } from 'bcrypt';
+import bcrypt from "bcrypt";
 import  User  from '@/models/users';
 import { connectToDB } from '@/utils/database';
 
@@ -9,6 +12,19 @@ const handler = NextAuth({
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
+    CredentialsProvider({
+      name: "credentials",
+      async authorize(credentials) {
+        await connectToDB();
+        const user = await User.findOne({email: credentials.userEmail})
+        console.log(user)
+        if (user && bcrypt.compareSync(credentials.userPassword, user.userPassword)) {
+          console.log("Successful auth")
+          return user
+        }
+        throw new Error("Invalid Email or Password");
+      }
     })
   ],
   sesssion: {
@@ -43,7 +59,15 @@ const handler = NextAuth({
         console.log("Error checking if user exists: ", error.message);
         return false
       }
+    },
+
+    async jwt({token, user}) {
+      if (user?._id) session.user._id = token._id
+      return token
     }
+  },
+  pages: {
+    signIn: '/auth/signin'
   }
 })
 
