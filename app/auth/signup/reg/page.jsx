@@ -3,6 +3,7 @@ import React, { useId } from 'react'
 import { useState, useEffect } from 'react'
 import { Country, State, City }  from 'country-state-city';
 import {fetchEmail} from '@/utils/fetchEmail';
+import { useRouter } from 'next/navigation';
 
 
 const page = () => {
@@ -19,7 +20,9 @@ const page = () => {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [phoneCode, setPhoneCode] = useState('Phone Code')
   // const [data, setData] = useState('')
+
   const [userEmail, setUserEmail] = useState('')
+  const router = useRouter()
 
 
   const allCountries = Country.getAllCountries()
@@ -65,6 +68,7 @@ const page = () => {
                 setError('')
                 setPasswordError('')
                 console.log('Data sent to backend')
+                router.push('/auth/signin')
               } else {
                 alert("Data not sent")
               }

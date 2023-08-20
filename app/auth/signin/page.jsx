@@ -13,20 +13,27 @@ const UserSignin = () => {
   const { data: session } = useSession();
   const router = useRouter();
 
-  useEffect(() => {
-    if (session?.user) router.push("/user/dashboard");
-  }, [session, router]);
+  // useEffect(() => {
+  //   if (session?.user) router.push("/user/dashboard");
+  // }, [session, router]);
 
 
-  const handleLogIn = async ({userEmail, userPassword}) => {
+  const handleLogIn = async (e) => {
+    e.preventDefault();
+
     console.log('handling login')
+
     try {
       const result = await signIn("credentials", {
-        redirect: false,
-        userEmail,
-        userPassword
+        email: userEmail,
+        password: userPassword,
+        redirect: false
       });
+      console.log(result)
       if (result.error) console.log(result.error)
+      
+      // Route to dashboard if signin is successfull
+      router.replace('/user/dashboard')
     } catch (error) {
       console.log(error)
     }
@@ -37,14 +44,14 @@ const UserSignin = () => {
     <div className='bg-[#080710] h-screen w-full flex items-center justify-center'>
 
       <form className='flex flex-col login-form'>
-      {session?.user? (
-        <>
-        <div> user Signed in </div>
-        <button onClick={() => {signOut()}}>Signout</button> 
-        </>
-        ) : (
-        <div>Not signed in</div>
-        )}
+        {/* {session?.user? (
+          <>
+          <div> user Signed in </div>
+          <button onClick={() => {signOut()}}>Signout</button> 
+          </>
+          ) : (
+          <div>Not signed in</div>
+        )} */}
         <h3 className='mb-4 text-center'>Login</h3>
 
         <label 

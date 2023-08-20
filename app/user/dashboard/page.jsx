@@ -24,17 +24,20 @@ const UserDashboard = () => {
   return (
     <main className='flex '>
       <UserSideBar />
-      User Dashboard
-
       {session?.user? (
-        <div>
-          <button
-            className=''
-            onClick={() => {
-              handleSignOut()
-            }}
-            >Sign out</button>
-        </div>
+        <>
+          <div className='absolute right-0'>
+            <button
+              className=''
+              onClick={() => {
+                handleSignOut()
+              }}
+              >Sign out</button>
+          </div>
+          <div className='ml-8'>
+             <h3>Hello {session?.user.email}</h3> 
+          </div>
+        </>
       ): (
         <div 
           className=''
