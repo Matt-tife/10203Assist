@@ -24,31 +24,29 @@ const Assessment = ({ questions, onSave }) => {
   };
 
   return (
-    <div>
+    <div className='w-[18rem] h-[18rem] flex flex-col justify-center items-center'>
       <h2>Assessment</h2>
       {!isCompleted && (
-        <div>
+        <div className='flex flex-col justify-center items-center'>
           <p>Question {currentQuestionIndex + 1}/{questions.length}</p>
           <div>{questions[currentQuestionIndex].text}</div>
           <div>
+            <input
+              className='border-2 border-blue-500 '
+              type="text"
+              value={answers[questions[currentQuestionIndex].id] || ''}
+              onChange={(e) =>
+                handleAnswer(questions[currentQuestionIndex].id, e.target.value)
+              }
+            />
+          </div>
+          <div className='flex gap-12 mb-[20px]'>
             <button onClick={handlePrevious} disabled={currentQuestionIndex === 0}>
               Previous
             </button>
             <button onClick={handleNext} disabled={currentQuestionIndex === questions.length - 1}>
               Next
             </button>
-          </div>
-          <div>
-            <label>
-              Your Answer:
-              <input
-                type="text"
-                value={answers[questions[currentQuestionIndex].id] || ''}
-                onChange={(e) =>
-                  handleAnswer(questions[currentQuestionIndex].id, e.target.value)
-                }
-              />
-            </label>
           </div>
         </div>
       )}
