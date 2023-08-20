@@ -1,11 +1,13 @@
 "use client"
 
-import UserSideBar from '@/components/UserSideBar'
-import React from 'react'
-import { useSession } from 'next-auth/react'
-import Link from 'next/link'
-import { signOut } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import UserSideBar from '@/components/UserSideBar';
+import React from 'react';
+import { useSession } from 'next-auth/react';
+import Link from 'next/link';
+import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+
+import Assessment from '../components/Assessment';
 
 
 const UserDashboard = () => {
