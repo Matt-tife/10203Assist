@@ -8,20 +8,13 @@ import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 import Assessment from '@/components/Assessment';
+import ProfileBar from '@/components/ProfileBar';
+import Notification from '@/components/Notification';
 
 
 const UserDashboard = () => {
   const { data: session } = useSession()
   const router = useRouter()
-
-  const handleSignOut = async () => {
-    try {
-      await signOut()
-      router.push('/')
-    } catch (error) {
-      throw new Error('cannot sign out')
-    }
-  }
 
   const questions = [
     // Define your assessment questions here, each with a unique id and text
@@ -41,19 +34,15 @@ const UserDashboard = () => {
       {session?.user? (
         <>
           <UserSideBar />
-          <div className='absolute right-0'>
-            <button
-              className=''
-              onClick={() => {
-                handleSignOut()
-              }}
-              >Sign out</button>
-          </div>
           <div className='ml-8'>
              <h3>Hello {session?.user.email}</h3> 
           </div>
+          <div className='flex gap-4 absolute right-0 mr-8'>
+            <Notification />
+            <ProfileBar/>
+          </div>
           {/* Main Dashboard */}
-          <section className='absolute left-32 top-24'>
+          <section className='absolute right-[50%] left-[50%]'>
             <Assessment questions={questions} onSave={handleSaveAssessment} /> 
           </section>
         </>

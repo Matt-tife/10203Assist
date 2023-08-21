@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+
 const Assessment = ({ questions, onSave }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -41,11 +42,17 @@ const Assessment = ({ questions, onSave }) => {
             />
           </div>
           <div className='flex gap-12 mb-[20px]'>
-            <button onClick={handlePrevious} disabled={currentQuestionIndex === 0}>
-              Previous
+            <button 
+              onClick={handlePrevious} 
+              disabled={currentQuestionIndex === 0}
+              >
+                Previous
             </button>
-            <button onClick={handleNext} disabled={currentQuestionIndex === questions.length - 1}>
-              Next
+            <button 
+              onClick={handleNext} 
+              disabled={currentQuestionIndex === questions.length - 1}
+              >
+                Next
             </button>
           </div>
         </div>
