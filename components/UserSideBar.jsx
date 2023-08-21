@@ -7,6 +7,7 @@ import { navLinks } from '@/constants'
 const UserSideBar = () => {
 
   const { data: session } = useSession()
+  
   const router = useRouter()
 
   const handleSignOut = async () => {
