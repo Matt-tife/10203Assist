@@ -1,42 +1,50 @@
 "use client"
 
-import UserSideBar from '@/components/UserSideBar'
-import React from 'react'
-import { useSession } from 'next-auth/react'
-import Link from 'next/link'
-import { signOut } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import UserSideBar from '@/components/UserSideBar';
+import React from 'react';
+import { useSession } from 'next-auth/react';
+import Link from 'next/link';
+import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+
+import Assessment from '@/components/Assessment';
+import ProfileBar from '@/components/ProfileBar';
+import Notification from '@/components/Notification';
 
 
 const UserDashboard = () => {
   const { data: session } = useSession()
   const router = useRouter()
 
-  const handleSignOut = async () => {
-    try {
-      await signOut()
-      router.push('/')
-    } catch (error) {
-      throw new Error('cannot sign out')
-    }
-  }
+  const questions = [
+    // Define your assessment questions here, each with a unique id and text
+    { id: 'q1', text: 'How are you feeling today?' },
+    { id: 'q2', text: 'What is causing you stress?' },
+    // Add more questions as needed
+  ];
+
+  const handleSaveAssessment = (answers) => {
+    // Send answers to the backend for saving
+    console.log('Answers:', answers);
+    // You can make an API request to save the answers to the database here
+  };
 
   return (
     <main className='flex '>
-      <UserSideBar />
       {session?.user? (
         <>
-          <div className='absolute right-0'>
-            <button
-              className=''
-              onClick={() => {
-                handleSignOut()
-              }}
-              >Sign out</button>
-          </div>
+          <UserSideBar />
           <div className='ml-8'>
              <h3>Hello {session?.user.email}</h3> 
           </div>
+          <div className='flex gap-4 absolute right-0 mr-8'>
+            <Notification />
+            <ProfileBar/>
+          </div>
+          {/* Main Dashboard */}
+          <section className='absolute right-[50%] left-[50%]'>
+            <Assessment questions={questions} onSave={handleSaveAssessment} /> 
+          </section>
         </>
       ): (
         <div 
