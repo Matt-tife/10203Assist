@@ -13,7 +13,9 @@ export default function Home() {
       <Header />
       <HeroSection />
       <About />
-      <Service />
+      <div id='#services'>
+        <Service />
+      </div>
       <Footer />
     </div>
   )

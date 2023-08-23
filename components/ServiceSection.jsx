@@ -2,7 +2,7 @@ import React from "react";
 
 const Services = () => {
   return (
-    <section class="w-full">
+    <section class="w-full" >
       <div class="container mx-auto">
       
         <div class="text-center mx-auto mb-10 max-w-[510px]">
