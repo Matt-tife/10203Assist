@@ -8,17 +8,16 @@ const ProfileBar = () => {
   const links = [
     { href: '/account-settings', label: 'Account' },
     { href: '/notification', label: 'Notifications' },
-    { href: '/support', label: 'Support' },
     { href: '/settings', label: 'Settings' }
   ]
 
   return (
-    <Menu>
+    <Menu as='div' className='flex flex-col'>
       <Menu.Button>
         <Image 
-          src='/vercel.svg'
+          src='/images/avatar.png'
           width={40}
-          height={40}
+          height={30}
           alt='profile image'
           className='object-fit'
         />

@@ -3,8 +3,8 @@ import {IoNotificationsCircle} from 'react-icons/io5'
 
 const Notification = () => {
   return (
-    <div>
-      <IoNotificationsCircle/>
+    <div className=''>
+      <IoNotificationsCircle className='w-[40px] h-[40px]'/>
     </div>
   )
 }

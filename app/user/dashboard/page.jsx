@@ -14,7 +14,7 @@ import Message from '@/components/Message';
 
 const UserDashboard = () => {
 
-  const [selectedTab, setSelectedTab] = useState('home');
+  const [selectedTab, setSelectedTab] = useState('Home');
 
   const handleTabClick = (tabName) => {
     setSelectedTab(tabName);
@@ -42,10 +42,10 @@ const UserDashboard = () => {
       {session?.user? (
         <>
           <UserSideBar selectedTab={selectedTab} onTabClick={handleTabClick}/>
-          <div className='ml-8 pt-3'>
-             <h3>Hello {session?.user.email}</h3> 
+          <div className='ml-8 pt-12 '>
+             <h3 className='md:text-[20px] lg:text-[30px]'>Hello {session?.user.email}</h3> 
           </div>
-          <div className='flex gap-4 absolute right-0 mr-8 pt-3'>
+          <div className='flex gap-4 absolute right-0 mr-12 pt-12'>
             <Notification />
             <ProfileBar/>
           </div>
