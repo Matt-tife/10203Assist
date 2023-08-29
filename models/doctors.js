@@ -3,20 +3,20 @@ import { Schema, model, models } from "mongoose";
 const DoctorSchema = new Schema({
   firstName: {
     type: String,
-    // required: [true, 'First Name is required!'],
+    required: [true, 'First Name is required!'],
   },
   lastName: {
     type: String,
-    // required: [true, 'Last Name is required!'],
+    required: [true, 'Last Name is required!'],
   },
   docEmail: {
     type: String,
-    // unique: [true, 'Email already exists!'],
+    unique: [true, 'Email already exists!'],
     required: [true, 'Email is required!'],
   },
   userPassword: {
     type: String,
-    // required: [true, 'Please input a password']
+    required: [true, 'Please input a password']
   },
   dob: {
     type: String
@@ -31,7 +31,7 @@ const DoctorSchema = new Schema({
     type: String 
   },
   phoneNumber: { 
-    type: Number 
+    type: String 
   },
   image: {
     type: String,
