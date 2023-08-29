@@ -1,19 +1,22 @@
 import { Schema, model, models } from "mongoose";
 
 const DoctorSchema = new Schema({
-  email: {
+  firstName: {
     type: String,
-    unique: [true, 'Email already exists!'],
-    // required: [true, 'Email is required!'],
+    // required: [true, 'First Name is required!'],
+  },
+  lastName: {
+    type: String,
+    // required: [true, 'Last Name is required!'],
+  },
+  docEmail: {
+    type: String,
+    // unique: [true, 'Email already exists!'],
+    required: [true, 'Email is required!'],
   },
   userPassword: {
     type: String,
     // required: [true, 'Please input a password']
-  },
-  username: {
-    type: String,
-    // required: [true, 'Username is required!'],
-    match: [/^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, "Username invalid, it should contain 8-20 alphanumeric letters and be unique!"]
   },
   dob: {
     type: String
@@ -24,16 +27,12 @@ const DoctorSchema = new Schema({
   userCountry: {
     type: String
   },
-  firstName: {
-    type: String,
-    // required: [true, 'First Name is required!'],
+  phoneCode: { 
+    type: String 
   },
-  lastName: {
-    type: String,
-    // required: [true, 'Last Name is required!'],
+  phoneNumber: { 
+    type: Number 
   },
-  phoneCode: { String },
-  phoneNumber: { Number },
   image: {
     type: String,
   },

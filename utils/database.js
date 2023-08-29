@@ -11,8 +11,8 @@ export const connectToDB = async () => {
   }
 
   try {
+    dbName: "assistivteq",
     await mongoose.connect(process.env.MONGODB_URI, {
-      dbName: "assistivteq",
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })

@@ -32,8 +32,12 @@ const UserSchema = new Schema({
     type: String,
     // required: [true, 'Last Name is required!'],
   },
-  phoneCode: { String },
-  phoneNumber: { Number },
+  phoneCode: { 
+    type: String 
+  },
+  phoneNumber: { 
+    type: Number 
+  },
   image: {
     type: String,
   },

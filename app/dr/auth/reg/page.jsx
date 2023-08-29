@@ -2,7 +2,6 @@
 import React, { useId } from 'react'
 import { useState, useEffect } from 'react'
 import { Country, State, City }  from 'country-state-city';
-import {fetchEmail} from '@/utils/fetchEmail';
 import { useRouter } from 'next/navigation';
 
 
@@ -21,7 +20,7 @@ const page = () => {
   const [phoneCode, setPhoneCode] = useState('Phone Code')
   // const [data, setData] = useState('')
 
-  const [userEmail, setUserEmail] = useState('')
+  const [docEmail, setdocEmail] = useState('')
   const router = useRouter()
 
 
@@ -41,7 +40,7 @@ const page = () => {
           const userCountry = Country.getCountryByCode(countries).name
           
           const data = {
-            userEmail,
+            docEmail,
             firstName,
             lastName,
             dob,
@@ -52,10 +51,9 @@ const page = () => {
             phoneNumber
           }
           
-          await fetch ('/api/reg', {
+          await fetch ('/api/reg/doc-reg', {
             method: 'POST',
             body: JSON.stringify({
-              action: 'docReg',
               ...data
             }),
             headers: {
@@ -68,7 +66,7 @@ const page = () => {
                 setError('')
                 setPasswordError('')
                 console.log('Data sent to backend')
-                router.push('/dr/assessment')
+                // router.push('/dr/assessment')
               } else {
                 alert("Data not sent")
               }
@@ -96,21 +94,7 @@ const page = () => {
     setSelectedCountry(e.target.value)
     setCountries(e.target.value)
   }
-
-  
-  // useEffect(() => {
-  //   const fetchEmaill = async () => {
-  //     await fetch('/api/reg/reg-email')
-  //       .then(response => response.json())
-  //       .then((result) => {
-  //         console.log(result)
-  //         setData(result.name)
-  //       })
-  //   }
-  //   fetchEmaill()
-  // }, [])
-
-
+ 
   return (
     <div className=''>
 
@@ -120,8 +104,8 @@ const page = () => {
           required
           className='w-48 h-8 border-2 border-black' 
           placeholder='Email'
-          value={userEmail}
-          onChange={(e) => setUserEmail(e.target.value)}
+          value={docEmail}
+          onChange={(e) => setdocEmail(e.target.value)}
         />
         <div className='flex flex-col gap-1'>
           <label 
