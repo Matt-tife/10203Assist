@@ -1,18 +1,26 @@
 "use client"
 
 import UserSideBar from '@/components/UserSideBar';
-import React from 'react';
+import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 import Assessment from '@/components/Assessment';
 import ProfileBar from '@/components/ProfileBar';
 import Notification from '@/components/Notification';
+import Message from '@/components/Message';
 
 
 const UserDashboard = () => {
+
+  const [selectedTab, setSelectedTab] = useState('home');
+
+  const handleTabClick = (tabName) => {
+    setSelectedTab(tabName);
+  };
+
+
   const { data: session } = useSession()
   const router = useRouter()
 
@@ -33,11 +41,11 @@ const UserDashboard = () => {
     <main className='flex '>
       {session?.user? (
         <>
-          <UserSideBar />
-          <div className='ml-8'>
+          <UserSideBar selectedTab={selectedTab} onTabClick={handleTabClick}/>
+          <div className='ml-8 pt-3'>
              <h3>Hello {session?.user.email}</h3> 
           </div>
-          <div className='flex gap-4 absolute right-0 mr-8'>
+          <div className='flex gap-4 absolute right-0 mr-8 pt-3'>
             <Notification />
             <ProfileBar/>
           </div>
@@ -45,6 +53,15 @@ const UserDashboard = () => {
           <section className='absolute right-[50%] left-[50%]'>
             <Assessment questions={questions} onSave={handleSaveAssessment} /> 
           </section>
+          <div className='absolute top-[8rem] left-[20rem]'>
+            {selectedTab === 'Home' && <div>Welcome to the Dashboard!</div>}
+            {selectedTab === 'Messages' && <Message />}
+            {selectedTab === 'Progress Tracker' && <div>Progress Tracker</div>}
+            {selectedTab === 'Book Consultation' && <div>Book Consultation</div>}
+            {selectedTab === 'Calender' && <div>Calender</div>}
+            {selectedTab === 'Resources' && <div>Resources</div>}
+            {selectedTab === 'Support' && <div>Support</div>}
+          </div>
         </>
       ): (
         <div 

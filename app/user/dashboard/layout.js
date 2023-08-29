@@ -3,14 +3,14 @@
 
 
 export const metadata = {
-  title: 'Assistivteq',
-  description: 'Mental Health First',
+  title: 'Assistivteq - Dashboard',
+  description: 'Patient Dashboard',
 }
 
 export default function RootLayout({ children }) {
   return (
-    <section>
+    <article>
       {children}
-    </section>
+    </article>
   )
 }

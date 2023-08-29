@@ -1,10 +1,11 @@
 export const navLinks = [
-  {href:'/user/dashboard/chat', title: 'Messages', key:'message'},
-  {href:'/user/dashboard/progress', title: 'Progress Tracker', key:'tracker'},
-  {href:'/user/dashboard/bookings', title: 'Book Consultation', key:'booking'},
-  {href:'/user/dashboard/calender', title: 'Calender', key:'Calender'},
-  {href:'/user/dashboard/resources', title: 'Resources', key:'resources'},
-  {href:'/user/dashboard/support', title: 'Support', key:'support'},
+  {title: 'Home', key:'home'},
+  {title: 'Messages', key:'message'},
+  {title: 'Progress Tracker', key:'tracker'},
+  {title: 'Book Consultation', key:'booking'},
+  {title: 'Calender', key:'Calender'},
+  {title: 'Resources', key:'resources'},
+  {title: 'Support', key:'support'},
 ]
 
 export const headerLinks = [
