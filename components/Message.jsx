@@ -5,9 +5,9 @@ import ChatList from './ChatList'
 const Message = () => {
   return (
     <div className='flex flex-col'>
-      <div className=''>
+      {/* <div className=''>
         Message Navbar
-      </div>
+      </div> */}
       <div className='flex'>
         <ChatList />
         <ChatBox />
